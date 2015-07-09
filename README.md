@@ -48,16 +48,16 @@ Let's put in a route that we can hit, and a corresponding controller action.
 In `routes.rb`
 
 ```ruby
-resources :skippers
+resources :dragonflies
 ```
 
-Create a `skippers_controller.rb`, and within that let's have one action.
+Create a `dragonflies_controller.rb`, and within that let's have one action.
 
 ```ruby
-class SkippersController < ApplicationController
+class DragonfliesController < ApplicationController
 
   def index
-    render json: { skippers: "fiery" }
+    render json: { dragonflies: "are awesome" }
   end
   
 end
@@ -76,7 +76,7 @@ Now let's write some JS in our client app to hit our server app.  We'll make a f
 ```javascript
 $(document).on('page:change', function() {
     $.ajax({
-        url: 'http://localhost:3000/skippers',
+        url: 'http://localhost:3000/dragonflies',
         type: 'get'
     }).done(function(data) {
         console.log(data);
@@ -89,11 +89,11 @@ $(document).on('page:change', function() {
 Almost there!  Once we get our code working, we should expect to see a CORS error, because we haven't set any headers on our server to allow cross domain access.  One way to set these headers is right in the controller, with a `before_action`.  Something like:
 
 ```ruby
-class SkippersController < ApplicationController
+class DragonfliesController < ApplicationController
   before_action :allow_cross_domain
 
   def index
-    render json: { fiery: "skippers" }
+    render json: { dragonflies: "are awesome" }
   end
 
   private
